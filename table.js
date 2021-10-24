@@ -1,2 +1,9 @@
-import * as data from './data1.json';
-const {name} = data;
+[{
+   "id": 1,
+   "name" "Item 1",
+   "pric": "$1"
+  }, {
+   "id": 2,
+   "name": "Item",
+   "price": "$2"
+}]

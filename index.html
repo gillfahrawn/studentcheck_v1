@@ -22,8 +22,6 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-
 </head>
 
 <body>
@@ -97,6 +95,8 @@
             </nav>
 
 
+            <table id="table"></table>
+
             <h5 class="mb-0"><BR>Math<BR></h5>
             <div id="accordion">
               <div class="card">
@@ -110,7 +110,6 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                   <div class="card-body">
                    
-                 <table id="table"></table>
 
                   </div>
                 </div>
@@ -232,9 +231,7 @@
                   </div>
                 </div>
               </div>
-            </div>
-
-    
+            </div>    
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
@@ -259,7 +256,25 @@
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
-        });
+        }); 
+
+        function onLoad() {
+            $.getJSON( "test.js", function( jsonData ) {
+                  console.log( "JSON Data: " + jsonData.users[ 3 ].name );
+
+                    var length = jsonData.length;
+                    for (var i = 0; i < length; i++) {
+                        var clone = $('#template').clone(true).attr('id', '');
+                        clone.find('.name').html(jsonData[i]['name']);
+                        clone.find('.email').html(jsonData[i]['email']);
+                        clone.find('.content').html(jsonData[i]['content']);
+                        clone.appendTo('table');
+                    }
+            });
+        }
+
+        $(document).ready(onLoad);
+               
 
 
     </script>
